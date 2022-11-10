@@ -1,0 +1,14 @@
+#main {
+    height: 700px;
+    width: 500px;
+}
+
+#buttons{
+    height: 500px;
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    background-color: blue ;
+    gap: 5px;
+}
