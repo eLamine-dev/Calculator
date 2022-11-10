@@ -12,3 +12,10 @@
     background-color: blue ;
     gap: 5px;
 }
+
+.button {
+    background-color: chartreuse;
+    text-align: center;
+    
+    padding: auto;
+}
