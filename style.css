@@ -46,6 +46,10 @@ html, body{
     cursor: pointer;
 }
 
+.button:hover{
+    background-color: #575b6c;
+}
+
 .button::first-child{
     display: inline-block;
     vertical-align: middle;
