@@ -8,30 +8,40 @@ html, body{
 }
 #header {
     height: 42px;
+    border-bottom: 1px solid #606470;
 }
 
 #main {
-    /* height: 700px;
-    width: 424px; */
+    
     background-color: #323643;
     border-radius: 14px;
 }
 
 #screen {
-    height: 160px;
+    height: 140px;
+    color: azure;
+    display: flex;
+    flex-direction: column-reverse;
+    font-size:40px;
     /* margin: 24px 0; */
     /* background-color: #4d587d; */
-    border: 1px solid #606470;
 }
 
+#screen span {
+    margin: 12px;
+    text-align: end;
+}
+
+
 #buttons{
-    padding: 12px;
+    border-top: 1px solid #606470;
+    padding: 10px;
     height: 300px;
     width: 380px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    gap: 5px;
+    gap: 4px;
 }
 
 .button {
@@ -47,18 +57,18 @@ html, body{
 }
 
 .button:hover{
-    background-color: #575b6c;
+    filter: brightness(90%);
 }
 
-.button::first-child{
-    display: inline-block;
-    vertical-align: middle;
+.number {
+    background-color: #555e77;
 }
 
 #equal {
     background-color: #379956;
     grid-row: span 2;
 }
+
 #backspace{
     background-color: #c24d2c;
 }
