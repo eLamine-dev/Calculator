@@ -19,17 +19,24 @@ html, body{
 
 #screen {
     height: 140px;
-    color: azure;
     display: flex;
     flex-direction: column-reverse;
-    font-size:40px;
-    /* margin: 24px 0; */
-    /* background-color: #4d587d; */
+    text-align: end;
+
 }
 
-#screen span {
-    margin: 12px;
-    text-align: end;
+#main-text {
+    color: azure;
+    font-size:40px;
+    margin:  16px;
+    height: 46px;
+    
+}
+
+#history-text {
+    font-size:36px;
+    color: gray;
+    margin: 0 16px;
 }
 
 
