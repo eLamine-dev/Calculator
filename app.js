@@ -42,55 +42,65 @@ const operationsButtons = document.querySelectorAll('.op');
 operationsButtons.forEach(btn => {
     btn.addEventListener('click', ()=>{
         
-       
-            if (Calculator.firstOperand === '' ){
-                if (btn.id === 'equal' ){
-
-                } else {
-                    Calculator.firstOperand = screenMain.innerText;
-                    Calculator.operator = btn.value;
-                    screenSecond.innerText = `${Calculator.firstOperand} ${btn.innerText}` ;
-                    screenMain.innerText = '';
-                }
-                
-                
-    
-            } else if (Calculator.firstOperand !== '') {
-                if (screenMain.innerText === ''){
-                    Calculator.operator = btn.value;
-                    screenSecond.innerText = ` ${Calculator.result} ${btn.innerText}`;
-                } else {
-                    if (btn.id === 'equal' && Calculator.operator !== ''){
-                        Calculator.secondOperand = screenMain.innerText;
-                        Calculator.operate();
-                        screenMain.innerText = `${Calculator.result}`;
-                        Calculator.operator = '';
-                        screenSecond.innerText += ` ${Calculator.secondOperand}`
-                        Calculator.firstOperand = ''; 
-                    } else { 
-                        Calculator.secondOperand = screenMain.innerText;
-                        Calculator.operate();
-                        screenMain.innerText = '';
-                        Calculator.operator = btn.value;
-                        screenSecond.innerText = ` ${Calculator.result} ${btn.innerText}`
-                        Calculator.firstOperand = Calculator.result; 
-
-                    }
-                    
-                }
-            }
-
+        if (btn.id === 'equal') handleEqualBtn(btn);
+        else if (btn.classList.contains('one-operand')) handleOneOperandOperations(btn);
+        else handleTwoOperandsOperations(btn)
         
-
-
-
-            
-
         console.log(Calculator);
-            
-        
+             
     })
 });
+
+
+function handleEqualBtn(btn) {
+    if (Calculator.firstOperand === '' ) {
+
+    } else if (Calculator.firstOperand !== '' && screenMain.innerText === ''){
+        Calculator.result = Calculator.firstOperand;
+        screenMain.innerText = Calculator.result;
+        screenSecond.innerText = ``;
+        Calculator.firstOperand = '';
+    } else {
+            Calculator.secondOperand = screenMain.innerText;
+            Calculator.operate();
+            screenMain.innerText = `${Calculator.result}`;
+            Calculator.operator = '';
+            screenSecond.innerText += ` ${Calculator.secondOperand}`
+            Calculator.firstOperand = '';
+
+    }
+}
+
+function handleTwoOperandsOperations(btn) {
+    if (Calculator.firstOperand === '' ){
+        Calculator.firstOperand = screenMain.innerText;
+        Calculator.operator = btn.value;
+        screenSecond.innerText = `${Calculator.firstOperand} ${btn.innerText}` ;
+        screenMain.innerText = '';
+
+    } else if (Calculator.firstOperand !== '') {
+        if (screenMain.innerText === ''){
+            Calculator.operator = btn.value;
+            screenSecond.innerText = `${Calculator.result || Calculator.firstOperand} ${btn.innerText}`;
+        } else {
+            Calculator.secondOperand = screenMain.innerText;
+            Calculator.operate();
+            screenMain.innerText = '';
+            Calculator.operator = btn.value;
+            screenSecond.innerText = ` ${Calculator.result} ${btn.innerText}`
+            Calculator.firstOperand = Calculator.result;   
+        }
+    }
+}
+
+function handleOneOperandOperations(btn) {
+
+        Calculator.firstOperand = screenMain.innerText || Calculator.result; 
+        Calculator.operator = btn.value;
+        Calculator.operate();
+        screenMain.innerText = Calculator.result;
+        screenSecond.innerText = '';
+}
 
 
 const screenMain = document.getElementById('main-text');
@@ -98,15 +108,12 @@ const screenSecond = document.getElementById('history-text');
 
 
 const numbersButtons = document.querySelectorAll('.number');
-
-
-
 numbersButtons.forEach(btn => { 
+
     btn.addEventListener('click', ()=>{
-        if (screenMain.innerText == "0" ) {screenMain.innerText = btn.id}
+        if (screenMain.innerText == "0" || screenMain.innerText == Calculator.result ) {screenMain.innerText = btn.id}
         else {screenMain.innerText += btn.id;}
     })
-    
 });
 
 

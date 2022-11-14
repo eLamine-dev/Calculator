@@ -26,17 +26,24 @@ html, body{
 }
 
 #main-text {
+    all:unset;
     color: azure;
     font-size:40px;
-    margin:  16px;
+    margin: 16px auto;
     height: 46px;
+    width: 16ch;
+    overflow:hidden;
+    
     
 }
 
 #history-text {
     font-size:36px;
     color: gray;
-    margin: 0 16px;
+    margin: 16px auto;
+    height: 46px;
+    width: 17ch;
+    overflow:hidden;
 }
 
 
