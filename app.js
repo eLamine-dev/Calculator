@@ -2,6 +2,7 @@ let Calculator = {
     firstOperand: '',
     secondOperand: '',
     operator: '',
+    previousEqualityResult: '',
     result: function(a, b, operator){
         a = Number(this.firstOperand);
         b = Number(this.secondOperand);
@@ -41,13 +42,19 @@ let Calculator = {
       
 }
 
+
+
+
+
 const operationsButtons = document.querySelectorAll('.op');
 
 operationsButtons.forEach(btn => {
     btn.addEventListener('click', ()=>{
         
-        if (btn.id === 'equal') handleEqualBtn(btn);
-        else if (btn.classList.contains('one-operand')) handleOneOperandOperations(btn);
+        if (btn.id === 'equal') 
+            handleEqualBtn(btn);
+        else if (btn.classList.contains('one-operand'))
+             handleOneOperandOperations(btn);
         else handleTwoOperandsOperations(btn)
         
         console.log(Calculator);
@@ -56,20 +63,38 @@ operationsButtons.forEach(btn => {
 });
 
 
-function handleEqualBtn(btn) {
-    if (Calculator.firstOperand === '') {
-        
-    } else if (Calculator.firstOperand !== '' && screenMain.innerText === ''){
-        screenMain.innerText = Calculator.firstOperand;
-        screenSecond.innerText = '';
-        Calculator.firstOperand = '';
-    } else if (Calculator.firstOperand !== '' && screenMain.innerText !== '') {
-            Calculator.secondOperand = screenMain.innerText;
-            screenMain.innerText = Calculator.result();
-            screenSecond.innerText += ` ${Calculator.secondOperand}`
-            Calculator.firstOperand = '';
+const screenMain = document.getElementById('main-text');
+const screenSecond = document.getElementById('history-text');
 
-    }
+
+function updateScreens(main, secondary) {
+    screenMain.innerText = main;
+    screenSecond.innerText = secondary;
+}
+
+
+function handleEqualBtn() {
+   if (Calculator.firstOperand !== '' && screenMain.innerText === ''){
+        updateScreens(Calculator.firstOperand, '');
+        // screenMain.innerText = Calculator.firstOperand;
+        // screenSecond.innerText = '';
+        Calculator.firstOperand = '';
+        Calculator.previousEqualityResult = screenMain.innerText;
+
+    } else if (screenMain.innerText == Calculator.previousEqualityResult) {
+        Calculator.firstOperand = Calculator.previousEqualityResult;
+        screenMain.innerText = Calculator.result();
+        screenSecond.innerText = screenSecond.innerText.replace(screenSecond.innerText.split(' ')[0], `${Calculator.previousEqualityResult}`);
+        Calculator.firstOperand = Calculator.previousEqualityResult;
+        Calculator.previousEqualityResult = screenMain.innerText;
+
+    } else if (Calculator.firstOperand !== '' && screenMain.innerText !== '') {
+        Calculator.secondOperand = screenMain.innerText;
+        screenMain.innerText = Calculator.result();
+        screenSecond.innerText += ` ${Calculator.secondOperand}`
+        Calculator.firstOperand = '';
+        Calculator.previousEqualityResult = screenMain.innerText;
+    } 
 }
 
 function handleTwoOperandsOperations(btn) {
@@ -103,18 +128,42 @@ function handleOneOperandOperations(btn) {
 }
 
 
-const screenMain = document.getElementById('main-text');
-const screenSecond = document.getElementById('history-text');
+
 
 
 const numbersButtons = document.querySelectorAll('.number');
 numbersButtons.forEach(btn => { 
-
     btn.addEventListener('click', ()=>{
-        if (screenMain.innerText == "0" || screenMain.innerText == Calculator.result ) {screenMain.innerText = btn.id}
+        if (screenMain.innerText == "0" || screenMain.innerText === Calculator.previousEqualityResult  ) {screenMain.innerText = btn.id}
         else if (screenMain.innerText.length < 15) {screenMain.innerText += btn.id;}
     })
 });
+
+
+const decimalPoint = document.getElementById('decimal-dot');
+decimalPoint.addEventListener('click', ()=>{
+    if (!(screenMain.innerText.includes(decimalPoint.value)) && screenMain.innerText.length < 14) {
+        screenMain.innerText += decimalPoint.value;
+    }
+});
+
+const backSpace = document.getElementById('backspace');
+backSpace.addEventListener('click', ()=>{
+    screenMain.innerText = screenMain.innerText.slice(0,-1);
+});
+
+const clearAll = document.getElementById('all-clear');
+clearAll.addEventListener('click', ()=>{
+    screenMain.innerText = 0;
+    screenSecond.innerText = '';
+    Calculator.firstOperand = '';
+})
+
+const pi = document.getElementById('pi');
+pi.addEventListener('click', ()=>{
+    screenMain.innerText = pi.value;
+})
+
 
 
 const add = function(a, b) {
