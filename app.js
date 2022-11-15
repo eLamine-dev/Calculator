@@ -1,3 +1,13 @@
+const screenMain = document.getElementById("main-text");
+const screenSecond = document.getElementById("history-text");
+const operationsButtons = document.querySelectorAll(".op");
+const numbersButtons = document.querySelectorAll(".number");
+const decimalPoint = document.getElementById("decimal-dot");
+const backSpace = document.getElementById("backspace");
+const clearAll = document.getElementById("all-clear");
+const pi = document.getElementById("pi");
+
+// Calculator object holding calculator variables
 let Calculator = {
   firstOperand: "",
   secondOperand: "",
@@ -43,7 +53,7 @@ let Calculator = {
     return processLongNum(tempResult);
   },
 };
-
+// Function prevent numbers longer than display from overflowing
 function processLongNum(num) {
   if (Math.trunc(num).toString().length > 15) {
     num = num.toExponential(4);
@@ -56,10 +66,7 @@ function processLongNum(num) {
   return num;
 }
 
-const screenMain = document.getElementById("main-text");
-const screenSecond = document.getElementById("history-text");
-
-const operationsButtons = document.querySelectorAll(".op");
+// operations buttons eventListener
 operationsButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     if (btn.id === "equal") handleEqualBtn(btn);
@@ -71,11 +78,12 @@ operationsButtons.forEach((btn) => {
   });
 });
 
-function updateScreens(main, secondary) {
-  screenMain.innerText = main;
-  screenSecond.innerText = secondary;
-}
+// function updateScreens(main, secondary) {
+//   screenMain.innerText = main;
+//   screenSecond.innerText = secondary;
+// }
 
+// function to handle equal button behavior
 function handleEqualBtn() {
   if (
     Calculator.firstOperand === "" &&
@@ -105,6 +113,7 @@ function handleEqualBtn() {
   }
 }
 
+// function to handle operations that need two operands
 function handleTwoOperandsOperations(btn) {
   if (Calculator.firstOperand === "") {
     Calculator.firstOperand = screenMain.innerText;
@@ -125,6 +134,7 @@ function handleTwoOperandsOperations(btn) {
   }
 }
 
+// function to handle operations that need only one operand
 function handleOneOperandOperations(btn) {
   Calculator.firstOperand = screenMain.innerText || Calculator.firstOperand;
   Calculator.operator = btn.value;
@@ -132,22 +142,21 @@ function handleOneOperandOperations(btn) {
   screenSecond.innerText = "";
   Calculator.firstOperand = "";
 }
-
-const numbersButtons = document.querySelectorAll(".number");
+// Numbers buttons events
 numbersButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     if (
       screenMain.innerText == "0" ||
       screenMain.innerText === Calculator.previousEqualityResult
     ) {
-      screenMain.innerText = btn.id;
+      screenMain.innerText = btn.value;
     } else if (screenMain.innerText.length < 15) {
-      screenMain.innerText += btn.id;
+      screenMain.innerText += btn.value;
     }
   });
 });
 
-const decimalPoint = document.getElementById("decimal-dot");
+// decimal point button event
 decimalPoint.addEventListener("click", () => {
   if (
     !screenMain.innerText.includes(decimalPoint.value) &&
@@ -157,19 +166,19 @@ decimalPoint.addEventListener("click", () => {
   }
 });
 
-const backSpace = document.getElementById("backspace");
+// backspace button event
 backSpace.addEventListener("click", () => {
   screenMain.innerText = screenMain.innerText.slice(0, -1);
 });
 
-const clearAll = document.getElementById("all-clear");
+// clearAll button event
 clearAll.addEventListener("click", () => {
   screenMain.innerText = 0;
   screenSecond.innerText = "";
   Calculator.firstOperand = "";
 });
 
-const pi = document.getElementById("pi");
+// Pi button event
 pi.addEventListener("click", () => {
   screenMain.innerText = pi.value;
 });
