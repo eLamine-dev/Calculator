@@ -16,7 +16,8 @@ let Calculator = {
                 tempResult = subtract(a, b)
                 break;
             case '/' :
-                tempResult = divide(a, b)
+                if (b == 0) alert('Stop it! get some help');
+                else tempResult = divide(a, b)
                 break;
             case '*':
                 tempResult = multiply(a, b)
@@ -55,10 +56,10 @@ function processLongNum(num) {
 
 
 
-
+const screenMain = document.getElementById('main-text');
+const screenSecond = document.getElementById('history-text');
 
 const operationsButtons = document.querySelectorAll('.op');
-
 operationsButtons.forEach(btn => {
     btn.addEventListener('click', ()=>{
         
@@ -70,10 +71,6 @@ operationsButtons.forEach(btn => {
              
     })
 });
-
-
-const screenMain = document.getElementById('main-text');
-const screenSecond = document.getElementById('history-text');
 
 
 function updateScreens(main, secondary) {
@@ -172,6 +169,7 @@ const pi = document.getElementById('pi');
 pi.addEventListener('click', ()=>{
     screenMain.innerText = pi.value;
 })
+
 
 
 
