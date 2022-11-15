@@ -1,116 +1,117 @@
-html{
-    height: 100vh;
-    box-sizing:border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color:#f0fbff;
-    
+html {
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0fbff;
 }
 
 #header {
-    height: 42px;
-    border-bottom: 1px solid #606470;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2px 24px; 
+  height: 42px;
+  border-bottom: 1px solid #606470;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 24px;
 }
 
 #header a {
-    text-decoration: none;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: x-large;
-    color: azure;
-    font-weight: bold;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: x-large;
+  color: azure;
+  font-weight: bold;
 }
 
-#header span{
-    color: #c24d2c;
-    font-weight:lighter;
+#header span {
+  color: #c24d2c;
+  font-weight: lighter;
 }
 
 #close {
-    height: 24px;
-    cursor: pointer;
+  height: 24px;
+  cursor: pointer;
 }
 
-
 #main {
-    
-    background-color: #323643;
-    border-radius: 14px;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: #323643;
+  border-radius: 14px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 #screen {
-    display: flex;
-    flex-direction: column-reverse;
-    text-align: end;
-    font-family: Ubuntu Mono, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #323643;
+  filter: brightness(110%);
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: end;
+  font-family: Ubuntu Mono, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 #main-text {
-    all:unset;
-    color: azure;
-    font-size:46px;
-    margin:  12px auto;
-    height: 42px;
-    width: 15ch;
-    overflow:hidden;
+  all: unset;
+  color: azure;
+  font-size: 46px;
+  margin: 12px auto;
+  height: 42px;
+  width: 15ch;
+  overflow: hidden;
 }
 
 #history-text {
-    font-size:36px;
-    color: gray;
-    margin: 12px auto;
-    height: 64px;
-    width: 17ch;
-    word-wrap:break-word;
+  font-size: 36px;
+  color: gray;
+  margin: 12px auto;
+  height: 64px;
+  width: 17ch;
+  word-wrap: break-word;
 }
 
-
-#buttons{
-    border-top: 1px solid #606470;
-    padding: 10px;
-    height: 300px;
-    width: 380px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 4px;
+#buttons {
+  border-top: 1px solid #606470;
+  padding: 10px;
+  height: 300px;
+  width: 380px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 4px;
 }
 
 button {
-    outline: none;
-    border: none;
-    font-size: x-large;
-    background-color: #606470;
-    color: azure;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: auto;
-    border-radius: 7px;
-    cursor: pointer;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  outline: none;
+  border: none;
+  font-size: x-large;
+  background-color: #606470;
+  color: azure;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: auto;
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-button:hover{
-    filter: brightness(90%);
+button:hover {
+  filter: brightness(90%);
 }
-
-
 
 .number {
-    background-color: #555e77;
+  background-color: #555e77;
 }
 
 #equal {
-    background-color: #379956;
-    grid-row: span 2;
+  background-color: #379956;
+  grid-row: span 2;
 }
 
-#backspace{
-    background-color: #c24d2c;
+#backspace {
+  background-color: #c24d2c;
 }
