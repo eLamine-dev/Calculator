@@ -7,39 +7,50 @@ let Calculator = {
         a = Number(this.firstOperand);
         b = Number(this.secondOperand);
         operator = this.operator;
+        let tempResult;
         switch (operator) {
             case '+':
-                return add(a, b)
+                tempResult = add(a, b)
                 break;
             case '-':
-                return subtract(a, b)
+                tempResult = subtract(a, b)
                 break;
             case '/' :
-                return divide(a, b)
+                tempResult = divide(a, b)
                 break;
             case '*':
-                return multiply(a, b)
+                tempResult = multiply(a, b)
                 break; 
             case '^':
-                return power(a, b)
+                tempResult = power(a, b)
                 break;
             case '%':
-                return percentage(a)
+                tempResult = percentage(a)
                 break;  
             case 'sqrt':
-                return squareRoot(a)
+                tempResult = squareRoot(a)
                 break; 
             case 'mod':
-                return modulo(a,b)
+                tempResult = modulo(a,b)
                 break; 
             case 'neg':
-                return NegPosToggle(a)
+                tempResult = NegPosToggle(a)
                 break; 
             default :
-                return ''
+                tempResult = ''
         }
-    },
-      
+    return processLongNum(tempResult);
+    },     
+}
+
+
+function processLongNum(num) {
+    if (Math.trunc(num).toString().length > 15) {
+        num = num.toExponential(4)
+    } else if (Math.trunc(num).toString().length < 14 && num.toString().length > 15) {
+        num = parseFloat(num.toFixed(15 - (Math.trunc(num).toString().length) + 1)) ;
+    } else { num = num }
+    return num
 }
 
 
@@ -51,11 +62,9 @@ const operationsButtons = document.querySelectorAll('.op');
 operationsButtons.forEach(btn => {
     btn.addEventListener('click', ()=>{
         
-        if (btn.id === 'equal') 
-            handleEqualBtn(btn);
-        else if (btn.classList.contains('one-operand'))
-             handleOneOperandOperations(btn);
-        else handleTwoOperandsOperations(btn)
+        if (btn.id === 'equal') handleEqualBtn(btn);
+        else if (btn.classList.contains('one-operand')) handleOneOperandOperations(btn);
+        else handleTwoOperandsOperations(btn);
         
         console.log(Calculator);
              
