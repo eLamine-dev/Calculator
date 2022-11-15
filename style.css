@@ -4,7 +4,7 @@ html{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color:#f7f7f7;
+    background-color:#f0fbff;
     
 }
 
@@ -40,6 +40,7 @@ html{
     
     background-color: #323643;
     border-radius: 14px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 #screen {

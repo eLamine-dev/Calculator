@@ -80,10 +80,11 @@ function updateScreens(main, secondary) {
 
 
 function handleEqualBtn() {
-   if (Calculator.firstOperand !== '' && screenMain.innerText === ''){
-        updateScreens(Calculator.firstOperand, '');
-        // screenMain.innerText = Calculator.firstOperand;
-        // screenSecond.innerText = '';
+    if (Calculator.firstOperand === '' && screenMain.innerText !== Calculator.previousEqualityResult){
+        return console.error();
+    } else if (Calculator.firstOperand !== '' && screenMain.innerText === ''){
+        screenMain.innerText = Calculator.firstOperand;
+        screenSecond.innerText = '';
         Calculator.firstOperand = '';
         Calculator.previousEqualityResult = screenMain.innerText;
 
@@ -91,7 +92,7 @@ function handleEqualBtn() {
         Calculator.firstOperand = Calculator.previousEqualityResult;
         screenMain.innerText = Calculator.result();
         screenSecond.innerText = screenSecond.innerText.replace(screenSecond.innerText.split(' ')[0], `${Calculator.previousEqualityResult}`);
-        Calculator.firstOperand = Calculator.previousEqualityResult;
+        Calculator.firstOperand = '';
         Calculator.previousEqualityResult = screenMain.innerText;
 
     } else if (Calculator.firstOperand !== '' && screenMain.innerText !== '') {
@@ -117,9 +118,9 @@ function handleTwoOperandsOperations(btn) {
         } else {
             Calculator.secondOperand = screenMain.innerText;
             screenMain.innerText = '';
-            Calculator.operator = btn.value;
             screenSecond.innerText = ` ${Calculator.result()} ${btn.innerText}`
             Calculator.firstOperand = Calculator.result();   
+            Calculator.operator = btn.value;
         }
     }
 }
