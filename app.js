@@ -193,6 +193,7 @@ pi.addEventListener("click", () => {
 
 // keyboard support
 window.addEventListener("keydown", (e) => {
+   e.preventDefault();
    handleKeyPress(e);
 });
 
