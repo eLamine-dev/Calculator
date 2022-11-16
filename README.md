@@ -1,4 +1,4 @@
-This project is part of TheOdinProject foundations curriculum .
+This project is part of TheOdinProject foundations curriculum.
 
 Project specifications: https://www.theodinproject.com/lessons/foundations-calculator
 

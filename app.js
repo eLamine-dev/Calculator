@@ -54,7 +54,7 @@ let Calculator = {
       return processLongNum(tempResult);
    },
 };
-// Function prevent numbers longer than display from overflowing
+// function to prevent numbers longer than display from overflowing
 function processLongNum(num) {
    if (Math.trunc(num).toString().length > 15) {
       num = num.toExponential(4);
@@ -142,9 +142,11 @@ function handleOneOperandOperations(btn) {
    Calculator.firstOperand = screenMain.innerText || Calculator.firstOperand;
    Calculator.operator = btn.value;
    screenMain.innerText = Calculator.result();
-   screenSecond.innerText = "";
+   screenSecond.innerText = ``;
    Calculator.firstOperand = "";
+   Calculator.previousEqualityResult = screenMain.innerText;
 }
+
 // Numbers buttons events
 numbersButtons.forEach((btn) => {
    btn.addEventListener("click", () => {
@@ -163,7 +165,8 @@ numbersButtons.forEach((btn) => {
 decimalPoint.addEventListener("click", () => {
    if (
       !screenMain.innerText.includes(decimalPoint.value) &&
-      screenMain.innerText.length < 14
+      screenMain.innerText.length < 14 &&
+      screenMain.innerText !== Calculator.previousEqualityResult
    ) {
       screenMain.innerText += decimalPoint.value;
    }
@@ -186,17 +189,24 @@ pi.addEventListener("click", () => {
    screenMain.innerText = pi.value;
 });
 
-window.addEventListener("keyup", (e) => {
+// keyboard support
+window.addEventListener("keydown", (e) => {
    handleKeyPress(e);
 });
 
-// keyboard support
 function handleKeyPress(e) {
    allButtons.forEach((btn) => {
       if (e.key == btn.value) {
          btn.click();
       }
    });
+   if (e.key === "p") {
+      document.getElementById("pi").click();
+   } else if (e.key == "m") {
+      document.getElementById("modulo").click();
+   } else if (e.key == "r") {
+      document.getElementById("squareRt").click();
+   }
 }
 
 // operations
