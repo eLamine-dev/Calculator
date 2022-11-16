@@ -182,6 +182,8 @@ clearAll.addEventListener("click", () => {
    screenMain.innerText = 0;
    screenSecond.innerText = "";
    Calculator.firstOperand = "";
+   Calculator.secondOperand = "";
+   Calculator.previousEqualityResult = "";
 });
 
 // Pi button event
