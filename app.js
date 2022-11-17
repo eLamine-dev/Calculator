@@ -58,7 +58,7 @@ let Calculator = {
       } else return processLongNum(tempResult);
    },
 };
-// function to prevent numbers longer than display from overflowing and non numbers display Error
+// function to prevent numbers longer than display from overflowing
 function processLongNum(num) {
    if (Math.trunc(num).toString().length > 15) {
       num = num.toExponential(4);
@@ -102,7 +102,10 @@ function handleEqualBtn() {
       screenSecond.innerText = "";
       Calculator.firstOperand = "";
       Calculator.previousResult = screenMain.innerText;
-   } else if (screenMain.innerText == Calculator.previousResult) {
+   } else if (
+      screenMain.innerText == Calculator.previousResult &&
+      screenSecond.innerText !== ""
+   ) {
       Calculator.firstOperand = Calculator.previousResult;
       screenMain.innerText = Calculator.result();
       screenSecond.innerText = screenSecond.innerText.replace(
