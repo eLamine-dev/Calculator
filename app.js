@@ -51,10 +51,14 @@ let Calculator = {
          default:
             tempResult = "";
       }
-      return processLongNum(tempResult);
+
+      if (isNaN(tempResult) || tempResult == Infinity) {
+         clearAll.click();
+         return "ERROR";
+      } else return processLongNum(tempResult);
    },
 };
-// function to prevent numbers longer than display from overflowing
+// function to prevent numbers longer than display from overflowing and non numbers display Error
 function processLongNum(num) {
    if (Math.trunc(num).toString().length > 15) {
       num = num.toExponential(4);
