@@ -122,7 +122,11 @@ function handleEqualBtn() {
 
 // function to handle operations that need two operands
 function handleTwoOperandsOperations(btn) {
-   if (Calculator.firstOperand === "" && screenMain.innerText !== "") {
+   if (
+      Calculator.firstOperand === "" &&
+      screenMain.innerText !== "" &&
+      screenMain.innerText !== "ERROR"
+   ) {
       Calculator.firstOperand = Number(screenMain.innerText);
       Calculator.operator = btn.value;
       screenSecond.innerText = `${Calculator.firstOperand} ${btn.innerText}`;
