@@ -13,7 +13,7 @@ let Calculator = {
    firstOperand: "",
    secondOperand: "",
    operator: "",
-   previousEqualityResult: "",
+   previousResult: "",
    result: function (a, b, operator) {
       a = Number(this.firstOperand);
       b = Number(this.secondOperand);
@@ -90,36 +90,36 @@ operationsButtons.forEach((btn) => {
 function handleEqualBtn() {
    if (
       Calculator.firstOperand === "" &&
-      screenMain.innerText !== Calculator.previousEqualityResult
+      screenMain.innerText !== Calculator.previousResult
    ) {
       return;
    } else if (Calculator.firstOperand !== "" && screenMain.innerText === "") {
-      screenMain.innerText = Calculator.firstOperand;
+      screenMain.innerText = Number(Calculator.firstOperand);
       screenSecond.innerText = "";
       Calculator.firstOperand = "";
-      Calculator.previousEqualityResult = screenMain.innerText;
-   } else if (screenMain.innerText == Calculator.previousEqualityResult) {
-      Calculator.firstOperand = Calculator.previousEqualityResult;
+      Calculator.previousResult = screenMain.innerText;
+   } else if (screenMain.innerText == Calculator.previousResult) {
+      Calculator.firstOperand = Calculator.previousResult;
       screenMain.innerText = Calculator.result();
       screenSecond.innerText = screenSecond.innerText.replace(
          screenSecond.innerText.split(" ")[0],
-         `${Calculator.previousEqualityResult}`
+         `${Calculator.previousResult}`
       );
       Calculator.firstOperand = "";
-      Calculator.previousEqualityResult = screenMain.innerText;
+      Calculator.previousResult = screenMain.innerText;
    } else if (Calculator.firstOperand !== "" && screenMain.innerText !== "") {
-      Calculator.secondOperand = screenMain.innerText;
+      Calculator.secondOperand = Number(screenMain.innerText);
       screenMain.innerText = Calculator.result();
       screenSecond.innerText += ` ${Calculator.secondOperand}`;
       Calculator.firstOperand = "";
-      Calculator.previousEqualityResult = screenMain.innerText;
+      Calculator.previousResult = screenMain.innerText;
    }
 }
 
 // function to handle operations that need two operands
 function handleTwoOperandsOperations(btn) {
    if (Calculator.firstOperand === "" && screenMain.innerText !== "") {
-      Calculator.firstOperand = screenMain.innerText;
+      Calculator.firstOperand = Number(screenMain.innerText);
       Calculator.operator = btn.value;
       screenSecond.innerText = `${Calculator.firstOperand} ${btn.innerText}`;
       screenMain.innerText = "";
@@ -128,7 +128,7 @@ function handleTwoOperandsOperations(btn) {
          Calculator.operator = btn.value;
          screenSecond.innerText = `${Calculator.firstOperand} ${btn.innerText}`;
       } else {
-         Calculator.secondOperand = screenMain.innerText;
+         Calculator.secondOperand = Number(screenMain.innerText);
          screenMain.innerText = "";
          screenSecond.innerText = ` ${Calculator.result()} ${btn.innerText}`;
          Calculator.firstOperand = Calculator.result();
@@ -144,7 +144,7 @@ function handleOneOperandOperations(btn) {
    screenMain.innerText = Calculator.result();
    screenSecond.innerText = "";
    Calculator.firstOperand = "";
-   Calculator.previousEqualityResult = screenMain.innerText;
+   Calculator.previousResult = screenMain.innerText;
 }
 
 // Numbers buttons events
@@ -152,7 +152,7 @@ numbersButtons.forEach((btn) => {
    btn.addEventListener("click", () => {
       if (
          screenMain.innerText == "0" ||
-         screenMain.innerText === Calculator.previousEqualityResult
+         screenMain.innerText === Calculator.previousResult
       ) {
          screenMain.innerText = btn.value;
       } else if (screenMain.innerText.length < 15) {
@@ -166,7 +166,7 @@ decimalPoint.addEventListener("click", () => {
    if (
       !screenMain.innerText.includes(decimalPoint.value) &&
       screenMain.innerText.length < 14 &&
-      screenMain.innerText !== Calculator.previousEqualityResult
+      screenMain.innerText !== Calculator.previousResult
    ) {
       screenMain.innerText += decimalPoint.value;
    }
@@ -174,16 +174,17 @@ decimalPoint.addEventListener("click", () => {
 
 // backspace button event
 backSpace.addEventListener("click", () => {
-   screenMain.innerText = screenMain.innerText.slice(0, -1);
+   if (screenMain.innerText.length < 2) screenMain.innerText = 0;
+   else screenMain.innerText = screenMain.innerText.slice(0, -1);
 });
-
+1 + 2;
 // clearAll button event
 clearAll.addEventListener("click", () => {
    screenMain.innerText = 0;
    screenSecond.innerText = "";
    Calculator.firstOperand = "";
    Calculator.secondOperand = "";
-   Calculator.previousEqualityResult = "";
+   Calculator.previousResult = "";
 });
 
 // Pi button event
