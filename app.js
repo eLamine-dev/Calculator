@@ -27,8 +27,8 @@ let Calculator = {
             tempResult = subtract(a, b);
             break;
          case "/":
-            if (b == 0) alert("Stop it! get some help");
-            else tempResult = divide(a, b);
+            // if (b == 0) alert("Stop it! get some help");
+            tempResult = divide(a, b);
             break;
          case "*":
             tempResult = multiply(a, b);
