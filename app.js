@@ -205,13 +205,13 @@ pi.addEventListener("click", () => {
 
 // keyboard support
 window.addEventListener("keydown", (e) => {
-   e.preventDefault();
    handleKeyPress(e);
 });
 
 function handleKeyPress(e) {
    allButtons.forEach((btn) => {
       if (e.key == btn.value) {
+         e.preventDefault();
          btn.click();
       }
    });
