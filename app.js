@@ -15,9 +15,12 @@ let Calculator = {
    operator: "",
    previousResult: "",
    result: function (a, b, operator) {
-      a = Number(this.firstOperand);
-      b = Number(this.secondOperand);
-      operator = this.operator;
+      if (!a) {
+         a = Number(this.firstOperand);
+         b = Number(this.secondOperand);
+         operator = this.operator;
+      }
+
       let tempResult;
       switch (operator) {
          case "+":
@@ -27,7 +30,6 @@ let Calculator = {
             tempResult = subtract(a, b);
             break;
          case "/":
-            // if (b == 0) alert("Stop it! get some help");
             tempResult = divide(a, b);
             break;
          case "*":
@@ -84,11 +86,6 @@ operationsButtons.forEach((btn) => {
       console.log(Calculator);
    });
 });
-
-// function updateScreens(main, secondary) {
-//   screenMain.innerText = main;
-//   screenSecond.innerText = secondary;
-// }
 
 // function to handle equal button behavior
 function handleEqualBtn() {
@@ -149,13 +146,21 @@ function handleTwoOperandsOperations(btn) {
 }
 
 // function to handle operations that need only one operand
+// function handleOneOperandOperations(btn) {
+//    Calculator.firstOperand = screenMain.innerText || Calculator.firstOperand;
+//    Calculator.operator = btn.value;
+//    screenMain.innerText = Calculator.result();
+//    screenSecond.innerText = "";
+//    Calculator.firstOperand = "";
+//    Calculator.previousResult = screenMain.innerText;
+// }
+
 function handleOneOperandOperations(btn) {
-   Calculator.firstOperand = screenMain.innerText || Calculator.firstOperand;
-   Calculator.operator = btn.value;
-   screenMain.innerText = Calculator.result();
-   screenSecond.innerText = "";
-   Calculator.firstOperand = "";
-   Calculator.previousResult = screenMain.innerText;
+   screenMain.innerText = Calculator.result(
+      Number(screenMain.innerText),
+      0,
+      btn.value
+   );
 }
 
 // Numbers buttons events
@@ -188,7 +193,7 @@ backSpace.addEventListener("click", () => {
    if (screenMain.innerText.length < 2) screenMain.innerText = 0;
    else screenMain.innerText = screenMain.innerText.slice(0, -1);
 });
-1 + 2;
+
 // clearAll button event
 clearAll.addEventListener("click", () => {
    screenMain.innerText = 0;
