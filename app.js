@@ -60,6 +60,7 @@ let Calculator = {
       } else return processLongNum(tempResult);
    },
 };
+
 // function to prevent numbers longer than display from overflowing
 function processLongNum(num) {
    if (Math.trunc(num).toString().length > 15) {
@@ -82,8 +83,6 @@ operationsButtons.forEach((btn) => {
       else if (btn.classList.contains("one-operand"))
          handleOneOperandOperations(btn);
       else handleTwoOperandsOperations(btn);
-
-      console.log(Calculator);
    });
 });
 
@@ -146,15 +145,6 @@ function handleTwoOperandsOperations(btn) {
 }
 
 // function to handle operations that need only one operand
-// function handleOneOperandOperations(btn) {
-//    Calculator.firstOperand = screenMain.innerText || Calculator.firstOperand;
-//    Calculator.operator = btn.value;
-//    screenMain.innerText = Calculator.result();
-//    screenSecond.innerText = "";
-//    Calculator.firstOperand = "";
-//    Calculator.previousResult = screenMain.innerText;
-// }
-
 function handleOneOperandOperations(btn) {
    screenMain.innerText = Calculator.result(
       Number(screenMain.innerText),
