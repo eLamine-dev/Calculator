@@ -79,6 +79,7 @@ function processLongNum(num) {
 // operations buttons eventListener
 operationsButtons.forEach((btn) => {
    btn.addEventListener("click", () => {
+      console.table(Calculator);
       if (btn.id === "equal") handleEqualBtn(btn);
       else if (btn.classList.contains("one-operand"))
          handleOneOperandOperations(btn);
@@ -151,6 +152,7 @@ function handleOneOperandOperations(btn) {
       0,
       btn.value
    );
+   Calculator.previousResult = screenMain.innerText;
 }
 
 // Numbers buttons events
